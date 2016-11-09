@@ -48,17 +48,17 @@ public class ChatAnnotation {
         // Never trust the client  
         // TODO: 过滤输入的内容  
         
-    	for (int i = 0; i < 100; i++) {
+//    	for (int i = 0; i < 100; i++) {
     		
     		broadcast(message);  
             
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+//			try {
+//				Thread.sleep(2000);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
     	
     	
     
