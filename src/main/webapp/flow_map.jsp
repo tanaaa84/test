@@ -13,29 +13,73 @@ body, html, #allmap {
 	margin: 0;
 	font-family: "微软雅黑";
 }
+/* #allmap{height:600px;width:100%;} */
+#r-result {
+	width: 100%;
+}
 
 .anchorBL {
 	display: none
 }
 </style>
+
+
+<style type="text/css">
+.shape {
+	width: 200px;
+	height: 140px;
+	position: fixed !important;
+	position: absolute;
+	left: 5px;
+	bottom: 5px !important;
+	bottom: auto;
+	top: expression(eval(document.compatMode && document.compatMode ==
+		'CSS1Compat')? documentElement.scrollTop+(documentElement.clientHeight-
+		 this.clientHeight):document.body.scrollTop+(document.body.clientHeight-
+		 this.clientHeight));
+}
+
+#btn {
+	width: 300px;
+	height: 200px;
+	background: #0b312f;
+	opacity:0.6;
+	color:yellow;
+	
+}
+</style>
+
+
 <script type="text/javascript"
 	src="http://api.map.baidu.com/api?v=2.0&ak=E89cccc4b5854636f959a26a959a7a59"></script>
 <title>实时大屏幕</title>
 </head>
 <body>
 	<div id="allmap"></div>
+	<div class="shape">
+		<div id="btn"></div>
+	</div>
+
 </body>
 </html>
 
 <script type="text/javascript">
 	var map = new BMap.Map('allmap');
 	map.centerAndZoom(new BMap.Point(10.404269, 39.916042), 2);
-	// map.enableScrollWheelZoom(); // 允许滚轮缩放
+	map.enableScrollWheelZoom(); // 允许滚轮缩放
 	var mapStyle = {
 		features : [ "road", "building", "water", "land" ],//隐藏地图上的poi
 		style : "midnight" //设置地图风格为高端黑
 	}
 	map.setMapStyle(mapStyle);
+	var top_left_navigation = new BMap.NavigationControl();  //左上角，添加默认缩放平移控件      
+	map.addControl(top_left_navigation);    
+	
+	
+	
+
+	document.getElementById("btn").innerHTML = "<br/> 机票销售总计：2189320元<br/><br/>  里程换票总计：232900元</br><br/>  付费选座总计：150000元</br>";
+
 
 	// //创建小狐狸
 	//  var pt = new BMap.Point(116.417, 39.909);
@@ -55,11 +99,11 @@ body, html, #allmap {
 		}, 2 * 1000);//延迟5000毫米
 	}
 
-	/* var point1 = new BMap.Point(113.1180110311, 41.1285303362);
-	addMarker(point1);
+	//var point1 = new BMap.Point(113.1180110311, 41.1285303362);
+	//addMarker(point1);
 
-	var point2 = new BMap.Point(119.1349957807, 33.7877334408);
-	addMarker(point2); */
+	//var point2 = new BMap.Point(119.1349957807, 33.7877334408);
+	//addMarker(point2); 
 
 	////////////////////////
 	var Chat = {};
