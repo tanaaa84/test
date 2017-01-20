@@ -26,11 +26,11 @@ body, html, #allmap {
 
 <style type="text/css">
 .shape {
-	width: 200px;
+	width: 100%;
 	height: 140px;
 	position: fixed !important;
 	position: absolute;
-	left: 5px;
+	left: 0px;
 	bottom: 5px !important;
 	bottom: auto;
 	top: expression(eval(document.compatMode && document.compatMode ==
@@ -40,11 +40,11 @@ body, html, #allmap {
 }
 
 #btn {
-	width: 300px;
+	width: 100%;
 	height: 200px;
-	background: #0b312f;
-	opacity:0.6;
-	color:yellow;
+	background: #111929;
+	opacity:0.4;
+	color:#9EE5FE;
 	
 }
 </style>
@@ -76,7 +76,7 @@ body, html, #allmap {
 	map.addControl(top_left_navigation);    
 	
 	
-	
+	var pri = 0;
 
 	document.getElementById("btn").innerHTML = "<br/> 机票销售总计：2189320元<br/><br/>  里程换票总计：232900元</br><br/>  付费选座总计：150000元</br>";
 
@@ -96,7 +96,7 @@ body, html, #allmap {
 
 		setTimeout(function() {
 			map.removeOverlay(marker); //add your code
-		}, 2 * 1000);//延迟5000毫米
+		}, 2000);//延迟5000毫米
 	}
 
 	//var point1 = new BMap.Point(113.1180110311, 41.1285303362);
@@ -152,26 +152,37 @@ body, html, #allmap {
 	var Console = {};
 
 	Console.log = (function(message) {
-		//   	 alert("11");
-		// var console = document.getElementById('console');  
-		var p = document.createElement('p');
-		p.style.wordWrap = 'break-word';
-		p.innerHTML = message;
+		//var console = document.getElementById('console');  
+		//var p = document.createElement('p');
+		//p.style.wordWrap = 'break-word';
+		//p.innerHTML = message;
 
-		//alert(message);
+		//{"info": {"coordinates": {"item": [{"longitude": "234","latitude": "100"},{"longitude": "123","latitude": "232"}]}}}		
 
 		if (message.indexOf(",") > 0) {
-			var array = message.split(",");
-			var point5 = new BMap.Point(array[0], array[1]);
-			addMarker(point5);
+			//alert(message);
+			var json1 = eval("("+message+")");
+			//alert(json1.res.info.coordinates[0]);
+			var coordinates = json1.res.info.coordinates;
+			
+			
+		//	alert(json1.res.info.price);
+			
+			pri += parseInt(json1.res.info.price);
+			
+			document.getElementById("btn").innerHTML = pri;
+			
+			for (var i = 0; i < coordinates.length; i++) {
+				var array = coordinates[i].split(",");
+				var point = new BMap.Point(array[0], array[1]);
+				addMarker(point);
+			}
+			//var array = message.split(",");
+			//var point5 = new BMap.Point(array[0], array[1]);
+			//addMarker(point5);
 			//alert(array[0]+"-" +array[1]);
 		}
 
-		//         console.appendChild(p);  
-		//       while (console.childNodes.length > 25) {  
-		//         console.removeChild(console.firstChild);  
-		//   }  
-		// console.scrollTop = console.scrollHeight;  
 	});
 
 	Chat.initialize();
