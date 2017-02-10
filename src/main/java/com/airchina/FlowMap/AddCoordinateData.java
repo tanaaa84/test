@@ -6,11 +6,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
-import com.airchina.util.TimeHelper;
-
 import kafka.javaapi.producer.Producer;
 import kafka.producer.KeyedMessage;
 import kafka.producer.ProducerConfig;
+
+import com.airchina.util.TimeHelper;
 
 
 
@@ -82,9 +82,6 @@ public class AddCoordinateData {
 					
 					producer.send(new KeyedMessage<String, String>(TOPIC,str));
 					producer.send(new KeyedMessage<String, String>(TOPIC,"{ \"generalticket\":{\"price\": \"896\",\"code\": \"peksha\",\"time\": \""+ TimeHelper.getCurrentTime() +"\"}}"));
-
-					
-					
 					
 				}
 				line++;
@@ -101,6 +98,7 @@ public class AddCoordinateData {
 				}
 			}
 		}
+//		producer.send(new KeyedMessage<String, String>(TOPIC,"{ \"generalticket\":{\"price\": \"896\",\"code\": \"peksha\",\"time\": \""+ TimeHelper.getCurrentTime() +"\"}}"));
 
 	}
 

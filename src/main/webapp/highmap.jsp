@@ -35,7 +35,17 @@
 	
 	</div>
 		<div class="shape">
-			<div id="btn"></div>
+			<div id="btn">
+				<table>
+					<tr>
+						<td><span id="time"></span></td>
+					</tr>
+					<tr>
+						<td style="font-size:30px">机票销售总计：</td>
+						<td style="font-size:30px"><div id="price"></div></td>
+					</tr>
+				</table>
+			</div>
 		</div>
 	<script type="text/javascript" src="js/echarts-all-3.js"></script>
 	<script type="text/javascript" src="js/dataTool.min.js"></script>
@@ -44,7 +54,7 @@
 	<!-- <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=E89cccc4b5854636f959a26a959a7a59"></script> -->
 	<script type="text/javascript" src="js/bmap.min.js"></script>
 	<script type="text/javascript">
-	document.getElementById("btn").innerHTML = "<br/> <H1>机票销售总计：2189320元</H1><br/><br/>  里程换票总计：232900元</br><br/>  付费选座总计：150000元</br>";
+	
 
 		var pri = 0;
 		var dom = document.getElementById("container");
@@ -279,6 +289,7 @@
 			var geoCoordMap2 = {};
 			var date2 = [];
 			if (message.indexOf("coordinate") > 0) {  //坐标数据
+//				alert(message);
 				var msg = eval('('+message+')'); 
 				geoCoordMap2 = msg.coordinate;
 				for ( var name in geoCoordMap2) {
@@ -290,10 +301,12 @@
 						});
 					}
 				}
+				//alert("121");
 				refreshData(date2, geoCoordMap2);
 			}else if (message.indexOf("generalticket") > 0) {
 				var msg = eval('('+message+')'); 
-				document.getElementById("btn").innerHTML = ""+ msg.generalticket.time +"<br/> <h1>机票销售总计："+formatNumber(msg.generalticket.totalprice) +"元</h1><br/>";
+				document.getElementById("price").innerHTML = formatNumber(msg.generalticket.totalprice) + "元";
+				document.getElementById("time").innerHTML = msg.generalticket.time;
 			}
 
 		});
@@ -319,6 +332,9 @@
 		    while (re.test(b))   b = b.replace(re, "$1,$2$3");
 		    return a + "" + b + "" + c;
 		}
+		
+
+		
 	</script>
 
 
